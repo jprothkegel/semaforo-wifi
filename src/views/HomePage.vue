@@ -2,7 +2,8 @@
     <v-layout>
         <v-flex xs12>
             <v-container grid-list-xl>
-                <div class="title">PUCV</div>
+                <div v-if="this.$store.getters.theming === 'dark'" class="title white--text">PUCV</div>
+                <div v-else class="title black--text">PUCV</div>
                 <v-layout row wrap align-center class="mt-2">
                     <v-flex xs12 md3 v-for="item in items" :key="item.name">
                         <home-page-card
@@ -68,3 +69,4 @@ export default {
   }
 }
 </script>
+

@@ -1,18 +1,12 @@
 <template>
-    <v-card>
-        <v-card-title class="headline"> {{this.title}} </v-card-title>
+    <v-card class="elevation-5 rounded-card" :color="getTheme">
+        <v-card-title :class="titleClass"> {{this.title}} </v-card-title>
         <v-container grid-list-xl >
             <v-layout row wrap align-center>
-                <v-flex xs12 md6>
+                <v-flex xs12>
                     <div class="text-xs-center">
-                        <v-icon size="100px" color="success">wifi</v-icon>
-                        <div class="title mt-2"> 2.4 GHz</div>
-                    </div>
-                </v-flex>
-                <v-flex xs12 md6>
-                    <div class="text-xs-center">
-                        <v-icon size="100px" class="icon" color="success">wifi</v-icon>
-                        <div class="title mt-2"> 5 GHz</div>
+                        <v-icon size="200px" :color="color">wifi_tethering</v-icon>
+                        <div :class="subTitleClass"> {{this.description}}</div>
                     </div>
                 </v-flex>
             </v-layout>
@@ -23,14 +17,41 @@
 <script>
 export default {
     data(){
-        return{}
+        return{
+            titleClass: 'headline white--text justify-center',
+            subTitleClass: 'title mt-2 white--text'
+        }
     },
     props: {
         title: {
             type: String
+        },
+        color: {
+            type: String
+        },
+        description: {
+            type: String
+        }
+    },
+    computed: {
+        getTheme(){
+            if(this.$store.getters.theming === 'dark'){
+                this.titleClass = 'headline white--text justify-center'
+                this.subTitleClass = 'title mt-2 white--text'
+                return '#1d1d1d'
+            } else {
+                this.titleClass = 'headline black--text justify-center'
+                this.subTitleClass = 'title mt-2 black--text'
+                return '#f0f0f0'
+            }
         }
     }
 }
 </script>
 
+<style scoped>
+.rounded-card{
+    border-radius: 20px;
+}
 
+</style>
